@@ -40,9 +40,9 @@ Message:
     <div style="margin-left:30px;">
       <label id="mqtt_status" style=" font-size:24px">Connecting MQTT ...</label><br><br>
       
-      <label style=" font-size:24px">MAC address</label>
-      <input id="bleAddr_input" style=" font-size:24px" value="00:11:22:33:44:55"/><br><br>
-      <button onclick="發送握力器上線訊號()" style=" font-size:24px">發送握力器上線訊號</button><br><br>
+      <label style=" font-size:24px">控制盒名稱</label>
+      <input id="bleAddr_input" style=" font-size:24px" value="Orange0001"/><br><br>
+      <button onclick="發送控制盒上線訊號()" style=" font-size:24px">發送控制盒上線訊號</button><br><br>
       <button onclick="亂數產生及發送握力數據()" style=" font-size:24px">亂數產生及發送握力數據</button>
       <label id="握力值" style=" font-size:24px">握力值</label>
       
@@ -154,7 +154,7 @@ Message:
         mqtt_client.send(message);
       }
       
-      function 發送握力器上線訊號() {
+      function 發送控制盒上線訊號() {
         var nowTime= new Date();
         publish_msg("dyno_online", nowTime.getTime().toString());        
       }
