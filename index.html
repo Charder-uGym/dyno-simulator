@@ -35,7 +35,8 @@ Message:
     <script src="js/jquery-3.5.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>            
 
-    <img src="金機.png" style="width:300px; margin:20px"><br>
+    <img src="金機.png" style="width:300px; margin:20px">
+     V0.1
       
     <div style="margin-left:30px;">
       <label id="mqtt_status" style=" font-size:24px">Connecting MQTT ...</label><br><br>
@@ -146,12 +147,12 @@ Message:
 
       }
       
-      function publish_msg(cmd_status, msg){
+      async function publish_msg(cmd_status, msg){
         var message; 
         message = new Paho.MQTT.Message(msg);
         message.destinationName = $("#bleAddr_input").val()+"/"+ cmd_status;
         message.qos=0; //不見得要 1, 0 應該也可以
-        mqtt_client.send(message);
+        await mqtt_client.send(message);
       }
       
       function 發送控制盒上線訊號() {
@@ -180,8 +181,10 @@ Message:
 //Message:
 //{"cmd":"要求量測", "name":"Paul Kang", "pic":"https://profile.line-scdn.net/0m00af3784725150d454061f6166cf75d95eb255c87861", "phone":"0955039022"}      
       
-      function 發送量測要求(){
-        publish_msg("cmd", '{"cmd":"要求量測", "name":"Paul Kang", "pic":"https://profile.line-scdn.net/0m00af3784725150d454061f6166cf75d95eb255c87861", "phone":"0955039022"}');         
+      async function 發送量測要求(){
+        var nowTime= new Date();
+        await publish_msg("dyno_online", nowTime.getTime().toString());   
+        await publish_msg("cmd", '{"cmd":"要求量測", "name":"Paul Kang", "pic":"https://profile.line-scdn.net/0m00af3784725150d454061f6166cf75d95eb255c87861", "phone":"0955039022"}');         
       }
       
     </script>
